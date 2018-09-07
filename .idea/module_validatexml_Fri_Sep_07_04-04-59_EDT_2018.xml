@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_validatexml" default="compile.module.validatexml">
+  <dirname property="module.validatexml.basedir" file="${ant.file.module_validatexml}"/>
+  
+  <property name="module.jdk.home.validatexml" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.validatexml" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.validatexml" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.validatexml" value="-encoding UTF-8 -source 9 -target 9 ${compiler.args}"/>
+  
+  <property name="validatexml.output.dir" value="undefined"/>
+  <property name="validatexml.testoutput.dir" value="undefined"/>
+  
+  <path id="validatexml.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="validatexml.module.production.classpath">
+    <path refid="${module.jdk.classpath.validatexml}"/>
+  </path>
+  
+  <path id="validatexml.runtime.production.module.classpath"/>
+  
+  <path id="validatexml.module.classpath">
+    <path refid="${module.jdk.classpath.validatexml}"/>
+  </path>
+  
+  <path id="validatexml.runtime.module.classpath"/>
+  
+  
+  <patternset id="excluded.from.module.validatexml">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.validatexml">
+    <patternset refid="excluded.from.module.validatexml"/>
+  </patternset>
+  
+  
+  <target name="compile.module.validatexml" depends="compile.module.validatexml.production,compile.module.validatexml.tests" description="Compile module ValidateXML"/>
+  
+  <target name="compile.module.validatexml.production" depends="register.custom.compilers" description="Compile module ValidateXML; production classes"/>
+  
+  <target name="compile.module.validatexml.tests" depends="register.custom.compilers,compile.module.validatexml.production" description="compile module ValidateXML; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.validatexml" description="cleanup module">
+    <delete dir="${validatexml.output.dir}"/>
+    <delete dir="${validatexml.testoutput.dir}"/>
+  </target>
+</project>
